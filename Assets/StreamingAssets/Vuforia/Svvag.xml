@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="bummarker" size="4.000000 4.000000" />
+    <ImageTarget name="monalisa" size="6.000000 3.378125" />
+    <ImageTarget name="annihilation" size="6.000000 3.375000" />
+    <ImageTarget name="picasso" size="6.000000 8.408072" />
+    <ImageTarget name="cat" size="6.000000 6.000000" />
+    <ImageTarget name="miyazaki" size="6.000000 3.275000" />
+  </Tracking>
+</QCARConfig>
