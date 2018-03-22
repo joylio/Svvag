@@ -5,7 +5,10 @@ using Vuforia;
 
 public class MenuDisplay : MonoBehaviour {
 
-    public float distanceToCam = 1000f;
+    public float distanceToCam = 800f;
+
+    private float offsetX = -400f;
+    private float offsetY = -200f;
 
 	void Update()
     {
@@ -25,7 +28,8 @@ public class MenuDisplay : MonoBehaviour {
             GameObject trackable = GameObject.Find(tb.TrackableName);
             Vector3 pos = trackable.transform.position;
             Debug.DrawRay(Camera.main.transform.position, pos);
-            transform.position = Camera.main.WorldToScreenPoint(pos) + new Vector3(0f, 0f, distanceToCam);
+            transform.up = -Camera.main.transform.forward;
+            transform.position = Camera.main.WorldToScreenPoint(pos) + new Vector3(offsetX, offsetY, distanceToCam);
         }
     }
 }
