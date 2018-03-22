@@ -589,7 +589,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1685d36c45feee438ca123f06f301e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 32900000, guid: 38bb9d73009a5994ab54a8073a25ef84, type: 3}
+  videoClips:
+  - {fileID: 32900000, guid: 38bb9d73009a5994ab54a8073a25ef84, type: 3}
+  - {fileID: 32900000, guid: 547b09968e49de749b7e3919c2ebfc61, type: 3}
+  - {fileID: 32900000, guid: 3eb57a39b0dbdf64290bf64232a71cfa, type: 3}
 --- !u!114 &816257250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3600b5e556b9b488963cc5fdde0d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceAsSwipe: 200
 --- !u!1001 &835924609
 Prefab:
   m_ObjectHideFlags: 0

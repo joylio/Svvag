@@ -6,22 +6,36 @@ using UnityEngine.UI;
 
 public class VideoStreaming : MonoBehaviour {
 
-    public VideoClip clip;
+    public VideoClip[] videoClips;
+
+    private int clipIndex = 0;
 
     void OnEnable()
     {
-        StartCoroutine(PlayVideo());
+        VideoClip clip = videoClips[0];
+        StartCoroutine(PlayVideo(clip));
     }
 
-    IEnumerator PlayVideo()
+    public void PlayNextClip()
+    {
+        if (clipIndex == 2)
+        {
+            clipIndex = -1;
+        }
+        VideoClip clip = videoClips[++clipIndex];
+        StartCoroutine(PlayVideo(clip));
+    }
+
+
+    IEnumerator PlayVideo(VideoClip c)
     {
         VideoPlayer videoPlayer = gameObject.AddComponent<VideoPlayer>();
-        videoPlayer.clip = clip;
-        
-        while(!videoPlayer.isPrepared)
+        videoPlayer.clip = c;
+
+        while (!videoPlayer.isPrepared)
         {
-            Debug.Log("------------------");
-            yield return new WaitForSeconds(1);
+            Debug.Log("---------loading video");
+            yield return new WaitForSeconds(0.5f);
             break;
         }
 
