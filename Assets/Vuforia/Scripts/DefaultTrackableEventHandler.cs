@@ -14,11 +14,6 @@ using Vuforia;
 /// </summary>
 public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 {
-    #region PUBLIC_MEMBER_VARIABLES
-
-    public GameObject menu;
-
-    #endregion // PUBLIC_MEMBER_VARIABLES
 
     #region PRIVATE_MEMBER_VARIABLES
 
@@ -90,9 +85,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Enable canvas':
         foreach (var component in canvasComponents)
             component.enabled = true;
-
-        // Enable menu:
-        menu.SetActive(true);
     }
 
 
@@ -113,9 +105,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Disable canvas':
         foreach (var component in canvasComponents)
             component.enabled = false;
-
-        // Disable menu:
-        menu.SetActive(false);
     }
 
     #endregion // PRIVATE_METHODS
