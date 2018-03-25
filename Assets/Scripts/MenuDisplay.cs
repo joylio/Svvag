@@ -11,8 +11,8 @@ public class MenuDisplay : MonoBehaviour {
     public GameObject secondaryMenu;
     public float menuSpacing;
 
-    private float offsetX = -400f;
-    private float offsetY = -200f;
+    private float offsetX = -200f;
+    private float offsetY = -300f;
 
 	void Update()
     {

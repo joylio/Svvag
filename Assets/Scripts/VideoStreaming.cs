@@ -13,29 +13,50 @@ public class VideoStreaming : MonoBehaviour {
     void OnEnable()
     {
         VideoClip clip = videoClips[0];
-        StartCoroutine(PlayVideo(clip));
+        StartCoroutine(PlayClip(clip));
     }
 
     public void PlayNextClip()
     {
+        StopCoroutine(PlayClip(videoClips[clipIndex]));
         if (clipIndex == 2)
         {
             clipIndex = -1;
         }
         VideoClip clip = videoClips[++clipIndex];
-        StartCoroutine(PlayVideo(clip));
+        StartCoroutine(PlayClip(clip));
+    }
+
+    public void TogglePlay()
+    {
+        VideoPlayer videoPlayer = GetComponent<VideoPlayer>();
+        if (videoPlayer != null)
+        {
+            if(videoPlayer.isPlaying)
+            {
+                videoPlayer.Pause();
+            }
+            else
+            {
+                videoPlayer.Play();
+            }
+        }
     }
 
 
-    IEnumerator PlayVideo(VideoClip c)
+    IEnumerator PlayClip(VideoClip c)
     {
-        VideoPlayer videoPlayer = gameObject.AddComponent<VideoPlayer>();
+        VideoPlayer videoPlayer = GetComponent<VideoPlayer>();
+        if (!videoPlayer)
+        {
+            videoPlayer = gameObject.AddComponent<VideoPlayer>();
+        }
         videoPlayer.clip = c;
 
         while (!videoPlayer.isPrepared)
         {
             Debug.Log("---------loading video");
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             break;
         }
 

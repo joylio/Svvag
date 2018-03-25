@@ -13,7 +13,7 @@ public class VideoTrackableEventHandler : DefaultTrackableEventHandler {
         videoMenu.SetActive(true);
     }
 
-    protected override void OnTrackingLost()
+    override protected void OnTrackingLost()
     {
         base.OnTrackingLost();
         videoMenu.SetActive(false);

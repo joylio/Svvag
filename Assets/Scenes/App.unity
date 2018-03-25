@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3600b5e556b9b488963cc5fdde0d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAsSwipe: 200
+  distanceAsSwipe: 100
 --- !u!1001 &835924609
 Prefab:
   m_ObjectHideFlags: 0

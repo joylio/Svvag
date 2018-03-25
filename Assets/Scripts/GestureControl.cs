@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
 
-public class SwipeControl : MonoBehaviour {
+public class GestureControl : MonoBehaviour {
 
     public float distanceAsSwipe;
 
@@ -35,18 +35,25 @@ public class SwipeControl : MonoBehaviour {
             {
                 endPos = touch.position;
 
+                float dist = Vector2.Distance(startPos, endPos);
+
+                // Click gesture recognized.
+                if(dist == 0f)
+                {
+                    GetComponent<VideoStreaming>().TogglePlay();
+                }
+
                 // Swipe gesture recognized.
-                if (Vector2.Distance(startPos, endPos) >= distanceAsSwipe)
-                { 
-                    //if (int.TryParse(GetComponent<VideoPlayer>().clip.name, out clipIndex))
+                else if (dist >= distanceAsSwipe)
+                {
                     GetComponent<VideoStreaming>().PlayNextClip();
                 }
 
-                // TODO: If not swipe, move the texture back in place.
-                else
-                {
+                //// TODO: If not swipe, move the texture back in place.
+                //else
+                //{
 
-                }
+                //}
             }
         }
         else
