@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ScreenBoundarySetup : MonoBehaviour {
 
+    [HideInInspector]
     public GameObject menuCanvas;
+
     public float thickness = 10f;
 
     private Camera cam;

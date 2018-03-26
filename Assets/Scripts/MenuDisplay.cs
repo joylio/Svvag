@@ -12,6 +12,8 @@ public class MenuDisplay : MonoBehaviour {
     public GameObject secondaryMenu;
     public float menuSpacing;
 
+    public ScreenBoundarySetup screenBoundarySetup;
+
     private Vector3[] startPos;
     private float offsetX = -200f;
     private float offsetY = -300f;
@@ -46,6 +48,10 @@ public class MenuDisplay : MonoBehaviour {
         {
             Debug.Log("Trackable: " + tb.TrackableName);
             GameObject trackable = GameObject.Find(tb.TrackableName);
+            if(trackable)
+            {
+                screenBoundarySetup.menuCanvas = gameObject;
+            }
             Vector3 pos = trackable.transform.position;
             //Debug.DrawRay(Camera.main.transform.position, pos);
             transform.up = -Camera.main.transform.forward;
