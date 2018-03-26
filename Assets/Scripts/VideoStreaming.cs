@@ -8,7 +8,7 @@ public class VideoStreaming : MonoBehaviour {
 
     public VideoClip[] videoClips;
 
-    private int clipIndex = 0;
+    private int m_clipIndex = 0;
 
     void OnEnable()
     {
@@ -18,12 +18,12 @@ public class VideoStreaming : MonoBehaviour {
 
     public void PlayNextClip()
     {
-        StopCoroutine(PlayClip(videoClips[clipIndex]));
-        if (clipIndex == 2)
+        StopCoroutine(PlayClip(videoClips[m_clipIndex]));
+        if (m_clipIndex == 2)
         {
-            clipIndex = -1;
+            m_clipIndex = -1;
         }
-        VideoClip clip = videoClips[++clipIndex];
+        VideoClip clip = videoClips[++m_clipIndex];
         StartCoroutine(PlayClip(clip));
     }
 
@@ -43,7 +43,6 @@ public class VideoStreaming : MonoBehaviour {
         }
     }
 
-
     IEnumerator PlayClip(VideoClip c)
     {
         VideoPlayer videoPlayer = GetComponent<VideoPlayer>();
@@ -52,18 +51,18 @@ public class VideoStreaming : MonoBehaviour {
             videoPlayer = gameObject.AddComponent<VideoPlayer>();
         }
         videoPlayer.clip = c;
+        videoPlayer.playOnAwake = false;
+        videoPlayer.Play();
 
         while (!videoPlayer.isPrepared)
         {
-            Debug.Log("---------loading video");
+            Debug.Log("---------loading video " + c + "---------");
             yield return new WaitForSeconds(1f);
             break;
         }
-
-        videoPlayer.playOnAwake = true;
+        
         RawImage image = GetComponent<RawImage>();
         image.texture = videoPlayer.texture;
         image.gameObject.transform.forward = -Camera.main.transform.forward;
-        videoPlayer.Play();
     }
 }
