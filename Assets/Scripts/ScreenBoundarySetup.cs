@@ -13,16 +13,28 @@ public class ScreenBoundarySetup : MonoBehaviour {
     private Vector3 m_leftPos, m_rightPos, m_topPos, m_bottomPos;
     private float m_frustumHeight, m_frustumWidth;
 
+    private bool m_activated;
+
     void Awake()
     {
         m_cam = Camera.main;
+        m_activated = false;
     }
 
     void Update()
     {
         if(menuCanvas.activeInHierarchy)
         {
+            m_activated = true;
             UpdateBoundary();
+        }
+        else
+        {
+            if (m_activated)
+            {
+                menuCanvas.GetComponent<MenuManager>().ResetMenu();
+                m_activated = false;
+            } 
         }
     }
 
