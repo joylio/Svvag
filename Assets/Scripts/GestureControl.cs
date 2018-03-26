@@ -6,15 +6,27 @@ using UnityEngine.UI;
 
 public class GestureControl : MonoBehaviour {
 
-    public float distanceAsSwipe;
+    public float swipeToNextDistance = 80f;
+    public float swipeMinDistance;
 
-    private Vector2 startPos;
-    private Vector2 endPos;
+    private RawImage m_image;
+    private Rect m_originUVRect;
+
+    private VideoStreaming m_videoStreaming;
+
+    private Vector2 m_startPos;
+    private Vector2 m_endPos;
+    private float m_dist;
+    private bool m_firstMove;
 
     void Awake()
     {
-        startPos = Vector2.zero;
-        endPos = Vector2.zero;
+        m_image = GetComponent<RawImage>();
+        m_originUVRect = m_image.uvRect;
+        m_videoStreaming = GetComponent<VideoStreaming>();
+        ResetTouchPos();
+        m_dist = 0f;
+        m_firstMove = true;
     }
 
 	void Update()
@@ -22,44 +34,63 @@ public class GestureControl : MonoBehaviour {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            if(touch.phase == TouchPhase.Began)
+            switch(touch.phase)
             {
-                startPos = touch.position;
-                endPos = touch.position;
-            }
-            else if(touch.phase == TouchPhase.Moved)
-            {
-                // TODO: Move the texture along the swipe 
-            }
-            else if(touch.phase == TouchPhase.Ended)
-            {
-                endPos = touch.position;
+                case TouchPhase.Began:
+                    m_startPos = touch.position;
+                    m_endPos = touch.position;
+                    m_firstMove = true;
+                    break;
 
-                float dist = Vector2.Distance(startPos, endPos);
+                case TouchPhase.Moved:
+                    m_endPos = touch.position;
+                    m_dist = m_endPos.x - m_startPos.x;
 
-                // Click gesture recognized.
-                if(dist == 0f)
-                {
-                    GetComponent<VideoStreaming>().TogglePlay();
-                }
+                    if (Mathf.Abs(m_dist) >= swipeMinDistance)
+                    {
+                        if (m_firstMove)
+                        {
+                            m_videoStreaming.TogglePlay();
+                            m_firstMove = false;
+                        }
 
-                // Swipe gesture recognized.
-                else if (dist >= distanceAsSwipe)
-                {
-                    GetComponent<VideoStreaming>().PlayNextClip();
-                }
 
-                //// TODO: If not swipe, move the texture back in place.
-                //else
-                //{
+                        m_image.uvRect = new Rect(new Vector2(m_originUVRect.x + m_dist / 100, m_originUVRect.y), m_originUVRect.size);
+                    }
 
-                //}
+                    break;
+
+                case TouchPhase.Ended:
+                    m_endPos = touch.position;
+                    m_dist = m_endPos.x - m_startPos.x;
+
+                    // Swipe gesture recognized.
+                    if (Mathf.Abs(m_dist) >= swipeToNextDistance)
+                    {
+                        m_image.uvRect = m_originUVRect;
+                        m_videoStreaming.PlayNextClip();
+                    }
+                    // Click gesture recognized
+                    // OR
+                    // Swipe fails -> Move texture back in place.
+                    else
+                    {
+                        m_videoStreaming.TogglePlay();
+                        m_image.uvRect = m_originUVRect;
+                    }
+
+                    break;
             }
         }
         else
         {
-            startPos = Vector2.zero;
-            endPos = Vector2.zero;
+            ResetTouchPos();
         }
+    }
+
+    private void ResetTouchPos()
+    {
+        m_startPos = Vector2.zero;
+        m_endPos = Vector2.zero;
     }
 }

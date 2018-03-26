@@ -213,7 +213,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: catMaterial
+  m_Name: bummarkerMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -226,7 +226,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b9f94480a291496b9e35ef93381522a5, type: 3}
+        m_Texture: {fileID: 2800000, guid: c71cd75d939d4bee99fdf7ae9a53fab4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -711,6 +711,39 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224823847817831672, guid: 417c48ad5e366af428e9be82ea37fca0,
     type: 2}
   m_PrefabInternal: {fileID: 757109867}
+--- !u!1 &783359493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 783359494}
+  m_Layer: 5
+  m_Name: Secondary Menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &783359494
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783359493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 397990055}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -0.0000006556511}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &816257247
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +839,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3600b5e556b9b488963cc5fdde0d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceAsSwipe: 100
+  swipeToNextDistance: 80
+  swipeMinDistance: 6
 --- !u!1 &1351542686
 GameObject:
   m_ObjectHideFlags: 0

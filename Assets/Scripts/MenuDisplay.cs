@@ -14,17 +14,17 @@ public class MenuDisplay : MonoBehaviour {
 
     public ScreenBoundarySetup screenBoundarySetup;
 
-    private Vector3[] startPos;
-    private float offsetX = -200f;
-    private float offsetY = -300f;
+    private Vector3[] m_startPos;
+    private float m_offsetX = -200f;
+    private float m_offsetY = -300f;
 
     void Awake()
     {
         int count = mainMenu.transform.childCount;
-        startPos = new Vector3[count];
+        m_startPos = new Vector3[count];
         for (int i = 0; i < count; i++)
         {
-            startPos[i] = mainMenu.transform.GetChild(i).position;
+            m_startPos[i] = mainMenu.transform.GetChild(i).position;
         }
     }
 
@@ -55,7 +55,7 @@ public class MenuDisplay : MonoBehaviour {
             Vector3 pos = trackable.transform.position;
             //Debug.DrawRay(Camera.main.transform.position, pos);
             transform.up = -Camera.main.transform.forward;
-            transform.position = Camera.main.WorldToScreenPoint(pos) + new Vector3(offsetX, offsetY, distanceToCam);
+            transform.position = Camera.main.WorldToScreenPoint(pos) + new Vector3(m_offsetX, m_offsetY, distanceToCam);
         }
     }
 
@@ -63,7 +63,7 @@ public class MenuDisplay : MonoBehaviour {
     {
         for (int i = 0; i < mainMenu.transform.childCount; i++)
         {
-            mainMenu.transform.GetChild(i).position = startPos[i];
+            mainMenu.transform.GetChild(i).position = m_startPos[i];
         }
     }
 
