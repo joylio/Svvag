@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vuforia;
 
-public class MenuDisplay : MonoBehaviour {
+public class MenuManager : MonoBehaviour {
 
     [Header("Main Menu Position")]
     public float distanceToCam = 1000f;
@@ -17,6 +17,14 @@ public class MenuDisplay : MonoBehaviour {
     [Header("Screen Boundary Setup")]
     public ScreenBoundarySetup screenBoundarySetup;
 
+    public Vector3[] StartPos
+    {
+        get
+        {
+            return m_startPos;
+        }
+    }
+
     private Vector3[] m_startPos;
 
     void Awake()
@@ -25,16 +33,24 @@ public class MenuDisplay : MonoBehaviour {
         m_startPos = new Vector3[count];
         for (int i = 0; i < count; i++)
         {
-            m_startPos[i] = mainMenu.transform.GetChild(i).position;
+            RectTransform trans = mainMenu.transform.GetChild(i).GetComponent<RectTransform>();
+            m_startPos[i] = trans.localPosition;
+            Debug.Log(m_startPos[i]);
         }
     }
 
-	void Update()
+    void Start()
     {
-        ShowMenu();
+        Debug.Log("start");
     }
 
-    private void ShowMenu()
+    void Update()
+    {
+        DisplayMenu();
+        Debug.Log("haha");
+    }
+
+    private void DisplayMenu()
     {
         // Get the Vuforia StateManager
         StateManager sm = TrackerManager.Instance.GetStateManager();
@@ -64,7 +80,7 @@ public class MenuDisplay : MonoBehaviour {
     {
         for (int i = 0; i < mainMenu.transform.childCount; i++)
         {
-            mainMenu.transform.GetChild(i).position = m_startPos[i];
+            mainMenu.transform.GetChild(i).GetComponent<RectTransform>().localPosition = StartPos[i];
         }
     }
 

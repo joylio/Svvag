@@ -204,8 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToCam: 1000
-  offsetX: -200
-  offsetY: -300
   mainMenu: {fileID: 1480196763282472}
   secondaryMenu: {fileID: 0}
   menuSpacing: 100
