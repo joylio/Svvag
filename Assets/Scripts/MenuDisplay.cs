@@ -6,17 +6,18 @@ using Vuforia;
 
 public class MenuDisplay : MonoBehaviour {
 
-    public float distanceToCam = 800f;
+    [Header("Main Menu Position")]
+    public float distanceToCam = 1000f;
 
+    [Header("Menu Layout")]
     public GameObject mainMenu;
     public GameObject secondaryMenu;
     public float menuSpacing;
 
+    [Header("Screen Boundary Setup")]
     public ScreenBoundarySetup screenBoundarySetup;
 
     private Vector3[] m_startPos;
-    private float m_offsetX = -200f;
-    private float m_offsetY = -300f;
 
     void Awake()
     {
@@ -55,7 +56,7 @@ public class MenuDisplay : MonoBehaviour {
             Vector3 pos = trackable.transform.position;
             //Debug.DrawRay(Camera.main.transform.position, pos);
             transform.up = -Camera.main.transform.forward;
-            transform.position = Camera.main.WorldToScreenPoint(pos) + new Vector3(m_offsetX, m_offsetY, distanceToCam);
+            transform.position = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(pos) + new Vector3(0f, 0f, distanceToCam));
         }
     }
 
