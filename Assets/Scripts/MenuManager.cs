@@ -9,10 +9,10 @@ public class MenuManager : MonoBehaviour {
     [Header("Menu Position")]
     public float distanceToCam = 1000f;
 
-    [Header("Menu Layout")]
-    public GameObject mainMenu;
-    public GameObject secondaryMenu;
-    public float menuSpacing;
+    //[Header("Menu Layout")]
+    //public GameObject mainMenu;
+    //public GameObject secondaryMenu;
+    //public float menuSpacing;
 
     [Header("Screen Boundary Setup")]
     public ScreenBoundarySetup screenBoundarySetup;
@@ -49,17 +49,17 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    public void OnMainMenuButtonClick(Button btn)
-    {
-        if(secondaryMenu.activeSelf == true)
-        {
-            secondaryMenu.SetActive(false);
-        }
-        else
-        {
-            secondaryMenu.SetActive(true);
-            Ray ray = new Ray(transform.position, -transform.position + btn.gameObject.transform.position);
-            secondaryMenu.transform.position = ray.GetPoint(Vector3.Distance(transform.position, btn.gameObject.transform.position) + menuSpacing);
-        }
-    }
+    //public void OnMainMenuButtonClick(Button btn)
+    //{
+    //    if(secondaryMenu.activeSelf == true)
+    //    {
+    //        secondaryMenu.SetActive(false);
+    //    }
+    //    else
+    //    {
+    //        secondaryMenu.SetActive(true);
+    //        Ray ray = new Ray(transform.position, -transform.position + btn.gameObject.transform.position);
+    //        secondaryMenu.transform.position = ray.GetPoint(Vector3.Distance(transform.position, btn.gameObject.transform.position) + menuSpacing);
+    //    }
+    //}
 }
