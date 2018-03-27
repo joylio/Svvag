@@ -6,6 +6,7 @@ using UnityEngine.Video;
 public class VideoTrackableEventHandler : DefaultTrackableEventHandler {
 
     public GameObject videoMenu;
+    public GameObject videoControlCanvas;
     
     override protected void OnTrackingFound()
     {
@@ -17,5 +18,6 @@ public class VideoTrackableEventHandler : DefaultTrackableEventHandler {
     {
         base.OnTrackingLost();
         videoMenu.SetActive(false);
+        videoControlCanvas.SetActive(false);
     }
 }

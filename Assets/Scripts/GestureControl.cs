@@ -9,6 +9,8 @@ public class GestureControl : MonoBehaviour {
     public float swipeToNextDistance = 80f;
     public float swipeMinDistance;
 
+    public GameObject videoControlCanvas;
+
     private RawImage m_image;
     private Rect m_originUVRect;
 
@@ -67,14 +69,22 @@ public class GestureControl : MonoBehaviour {
                     // Swipe gesture recognized.
                     if (Mathf.Abs(m_dist) >= swipeToNextDistance)
                     {
+                        if(videoControlCanvas.activeInHierarchy)
+                        {
+                            ToggleUI();
+                        }
                         m_image.uvRect = m_originUVRect;
                         m_videoStreaming.PlayNextClip();
                     }
-                    // Click gesture recognized
+                    // Click gesture recognized -> Show 'Pause' button.
                     // OR
                     // Swipe fails -> Move texture back in place.
                     else
                     {
+                        if(m_dist <= swipeMinDistance)
+                        {
+                            ToggleUI();
+                        }
                         m_videoStreaming.TogglePlay();
                         m_image.uvRect = m_originUVRect;
                     }
@@ -92,5 +102,17 @@ public class GestureControl : MonoBehaviour {
     {
         m_startPos = Vector2.zero;
         m_endPos = Vector2.zero;
+    }
+
+    private void ToggleUI()
+    {
+        if(videoControlCanvas.activeInHierarchy)
+        {
+            videoControlCanvas.SetActive(false);
+        }
+        else
+        {
+            videoControlCanvas.SetActive(true);
+        }
     }
 }
