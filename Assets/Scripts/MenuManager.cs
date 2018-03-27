@@ -6,7 +6,7 @@ using Vuforia;
 
 public class MenuManager : MonoBehaviour {
 
-    [Header("Main Menu Position")]
+    [Header("Menu Position")]
     public float distanceToCam = 1000f;
 
     [Header("Menu Layout")]
@@ -17,27 +17,6 @@ public class MenuManager : MonoBehaviour {
     [Header("Screen Boundary Setup")]
     public ScreenBoundarySetup screenBoundarySetup;
 
-    public Vector3[] StartPos
-    {
-        get
-        {
-            return m_startPos;
-        }
-    }
-
-    private Vector3[] m_startPos;
-
-    void Awake()
-    {
-        int count = mainMenu.transform.childCount;
-        m_startPos = new Vector3[count];
-        for (int i = 0; i < count; i++)
-        {
-            RectTransform trans = mainMenu.transform.GetChild(i).GetComponent<RectTransform>();
-            m_startPos[i] = trans.localPosition;
-            Debug.Log(m_startPos[i]);
-        }
-    }
 
     void Update()
     {
@@ -67,14 +46,6 @@ public class MenuManager : MonoBehaviour {
             //Debug.DrawRay(Camera.main.transform.position, pos);
             transform.up = -Camera.main.transform.forward;
             transform.position = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(pos) + new Vector3(0f, 0f, distanceToCam));
-        }
-    }
-
-    public void ResetMenu()
-    {
-        for (int i = 0; i < mainMenu.transform.childCount; i++)
-        {
-            mainMenu.transform.GetChild(i).GetComponent<RectTransform>().localPosition = StartPos[i];
         }
     }
 

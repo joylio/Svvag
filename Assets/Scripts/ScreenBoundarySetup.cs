@@ -32,7 +32,7 @@ public class ScreenBoundarySetup : MonoBehaviour {
         {
             if (m_activated)
             {
-                menuCanvas.GetComponent<MenuManager>().ResetMenu();
+                menuCanvas.GetComponentInChildren<MainMenuManager>().ResetLayout();
                 m_activated = false;
             } 
         }
